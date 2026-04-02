@@ -11,6 +11,49 @@ body {
   overflow: hidden;
 }
 
+#sky {
+  image-rendering: pixelated;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("assets/sky.png");
+  background-size: cover;
+}
+
+#wave {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-image: url("assets/wave.png");
+  background-repeat: repeat-x;
+
+  background-size: cover;
+  image-rendering: pixelated;
+}
+
+#entities {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#surfer {
+  image-rendering: pixelated;
+  width: 90px;
+  height: 90px;
+  background-image: url("assets/surfer.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+
+  image-rendering: pixelated;
+  left: 400px;
+}
+
 #score {
   position: absolute;
   top: 20px;
@@ -20,21 +63,80 @@ body {
   font-family: monospace;
 }
 
-
-#surfer {
-  width: 40px;
-  height: 40px;
-  background: white; /* bytt med bilde senere */
+#tunnel {
+  image-rendering: pixelated;
   position: absolute;
-  transition: bottom 0.2s;
-  bottom: 0;
-  left: 300px;
+  width: 100%;
+  height: 100%;
+
+  background-image: url("assets/tunnel.png");
+  background-size: cover;
+
+  pointer-events: none;
 }
+
+#foam {
+  image-rendering: pixelated;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background-image: url("assets/foam.png");
+  background-size: cover;
+
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 
 .obstacle {
-  width: 40px;
-  height: 40px;
-  background: red;
   position: absolute;
+  width: 60px;
+  height: 60px;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  image-rendering: pixelated;
 }
+
+.overlay {
+  transform: scale(5);
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background-size: cover;
+  image-rendering: pixelated;
+
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.3); 
+  backdrop-filter: blur(4px); 
+
+  z-index: 10;
+}
+
+.hidden {
+  display: none;
+}
+
+#finalScore {
+  transform: scale(1);
+  position: absolute;
+  color: rgb(69, 44, 18);
+  font-size: 8px;
+  font-family: monospace;
+
+  top: 49%;
+  left: 50%;
+}
+
+
 

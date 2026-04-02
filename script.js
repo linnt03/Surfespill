@@ -1,8 +1,16 @@
 // Henter elementene fra HTML
 const surfer = document.getElementById("surfer");
-const game = document.getElementById("game");
+const game = document.getElementById("entities");
+const startScreen = document.getElementById("startScreen");
+const gameOverScreen = document.getElementById("gameOverScreen");
 
-let gameRunning = true;
+const startBtn = document.getElementById("startBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+const finalScore = document.getElementById("finalScore");
+
+
+let gameRunning = false;
 let obstacles = [];
 
 // Fart og spawn (blir vanskeligere over tid)
@@ -13,7 +21,7 @@ let spawnRate = 1500;
 const lanes = [50, 200, 350];
 let currentLane = 1; // starter i midten
 
-// Score
+// Scorevariabel
 let score = 0;
 
 
@@ -22,11 +30,19 @@ function updateSurferPosition() {
   surfer.style.bottom = lanes[currentLane] + "px";
 }
 
+// Gir surferen en liten opp/ned bevegelse så det ser ut som han rir bølgen
+function animateSurfer() {
+  const bob = Math.sin(waveX * 0.05) * 5;
+
+  surfer.style.transform = `translateY(${bob}px)`;
+}
+
+
 // Startposisjon
 updateSurferPosition();
 
 
-// Lytter etter piltaster og flytter spilleren mellom lanes
+// Tar input fra piltaster og flytter spilleren mellom lanes
 document.addEventListener("keydown", (event) => {
   if (event.code === "ArrowUp" && currentLane < 2) {
     currentLane++;
@@ -39,18 +55,43 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// Bølge som eveger seg over skjermen
+let waveX = 0;
+const wave = document.getElementById("wave");
 
-// Lager en ny obstacle og plasserer den i tilfeldig lane
+function moveWave() {
+  waveX -= speed; // følger game speed
+  wave.style.backgroundPosition = waveX + "px 0px";
+}
+
+// Skum på bølgen som "glitcher"
+const foam = document.getElementById("foam");
+
+function animateFoam() {
+  if (Math.random() < 0.1) { // 10% sjanse hver frame
+    foam.style.opacity = 1;
+  } else {
+    foam.style.opacity = 0;
+  }
+}
+
+
+// Lager en ny obstacle og plasserer den i tilfeldig lane og tilfeldig type obstacle fra fil
 function createObstacle() {
   const obs = document.createElement("div");
   obs.classList.add("obstacle");
 
-  let lane = Math.floor(Math.random() * 3);
+  // velg tilfeldig obstacle type
+  const types = [ "shark", "buoy", "person"]; // TODO - add måke ?
+  const type = types[Math.floor(Math.random() * types.length)];
 
+  obs.style.backgroundImage = `url("assets/${type}.png")`;
+
+  let lane = Math.floor(Math.random() * 3);
   obs.style.bottom = lanes[lane] + "px";
   obs.style.left = window.innerWidth + "px";
 
-  game.appendChild(obs);
+  document.getElementById("entities").appendChild(obs);
 
   obstacles.push({
     element: obs,
@@ -58,6 +99,7 @@ function createObstacle() {
     position: window.innerWidth
   });
 }
+
 
 
 // Flytter alle obstacles mot venstre og fjerner dem når de er ute av skjermen
@@ -101,23 +143,69 @@ function updateScore() {
   document.getElementById("score").innerText = Math.floor(score);
 }
 
+// knapp start spill
+startBtn.addEventListener("click", () => {
+  startScreen.classList.add("hidden");
+  gameRunning = true;
+  spawnObstacleLoop();
+});
 
-// Stopper spillet når du krasjer
-function gameOver() {
-  gameRunning = false;
+// knapp restart spill
+restartBtn.addEventListener("click", () => {
+  resetGame();
+});
 
-  alert("Game Over! Score:" + Math.floor(score) ) ;
-  location.reload();
+function resetGame() {
+  // reset score
+  score = 0;
+  document.getElementById("score").innerText = 0;
+
+  // fjern gamle obstacles
+  obstacles.forEach((obs) => obs.element.remove());
+  obstacles = [];
+
+  // reset fart og spawn
+  speed = 5;
+  spawnRate = 1500;
+
+  // reset spiller
+  currentLane = 1;
+  updateSurferPosition();
+
+  // skjul game over screen
+  gameOverScreen.classList.add("hidden");
+
+  // start spillet igjen
+  gameRunning = true;
+
+  // restart obstacle spawning
+  spawnObstacleLoop();
 }
 
 
-// Hoved-loop som kjører spillet kontinuerlig
+
+// Stopper spillet når du krasjer og viser scoren du fikk
+function gameOver() {
+  gameRunning = false;
+
+  gameOverScreen.classList.remove("hidden");
+
+  finalScore.innerText = "Your Score: " + Math.floor(score);
+
+}
+
+
+
+// Hovedloop som kjører spillet kontinuerlig
 function gameLoop() {
   if (!gameRunning) return;
 
-  moveObstacles();
-  checkCollision();
-  updateScore();
+  moveWave(); // bølgen beveger seg langs skjermen
+  moveObstacles(); // Hindere beveger seg mot venstre
+  checkCollision(); // Kollisjon = game over
+  updateScore(); // score i hjørnet oppdateres
+  //animateFoam(); // skum glticher 
+  animateSurfer(); // Surfer beveger litt på seg
 }
 
 
@@ -144,7 +232,6 @@ setInterval(() => {
 
 
 // Starter spillet
-spawnObstacleLoop();
 setInterval(gameLoop, 20);
 
 

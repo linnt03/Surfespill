@@ -5,10 +5,33 @@
 </head>
 <body>
 
-    <div id="game">
-        <div id="surfer"></div>
-        <div id="score">0</div>
+    <div id="startScreen" class="overlay">
+        <img src="assets/start.png" id="startBtn" />
     </div>
+
+    <div id="gameOverScreen" class="overlay hidden">
+        <img src="assets/gameover.png" id="restartBtn" />
+        <div id="finalScore"></div>
+    </div>
+
+
+    <div id="game">
+
+        <div id="sky"></div>
+
+        <div id="wave"></div>
+
+            <div id="entities">
+                <div id="surfer"></div>
+                <div id="score">0</div>
+            </div>
+
+        <div id="tunnel"></div>
+
+        <div id="foam"></div>
+
+    </div>
+
 
 
   <script src="script.js"></script>
