@@ -18,8 +18,22 @@ let speed = 5;
 let spawnRate = 1500;
 
 // Lanes (posisjoner på skjermen)
-const lanes = [50, 200, 350];
 let currentLane = 1; // starter i midten
+
+function getLanes() {
+  if (window.innerWidth <= 768) {
+    const h = window.innerHeight;
+    return [
+      h * 0.2,
+      h * 0.45,
+      h * 0.7
+    ];
+  } else {
+    return [50, 200, 350]; // PC beholder original
+  }
+}
+
+let lanes = getLanes();
 
 // Scorevariabel
 let score = 0;
@@ -229,6 +243,41 @@ setInterval(() => {
     spawnRate -= 100;
   }
 }, 3000);
+
+// touch for mobil
+function setupTouchControls() {
+  let touchStartY = 0;
+  let touchEndY = 0;
+
+  document.addEventListener("touchstart", (e) => {
+    touchStartY = e.touches[0].clientY;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    touchEndY = e.changedTouches[0].clientY;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const diff = touchStartY - touchEndY;
+
+    // swipe opp → gå opp en lane
+    if (diff > 50 && currentLane < 2) {
+      currentLane++;
+      updateSurferPosition();
+    }
+
+    // swipe ned → gå ned en lane
+    if (diff < -50 && currentLane > 0) {
+      currentLane--;
+      updateSurferPosition();
+    }
+  }
+}
+
+if ('ontouchstart' in window) {
+  setupTouchControls();
+}
 
 
 // Starter spillet
