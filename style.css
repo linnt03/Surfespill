@@ -178,7 +178,7 @@ body {
   }
 
   #wave {
-    background-size: cover;
+    background-size: auto 100%;
     background-position: center bottom;
   }
 
@@ -188,14 +188,14 @@ body {
   }
 
   #surfer {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     left: 20%;
   }
 
   .obstacle {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
   }
 
   #score {

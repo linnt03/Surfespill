@@ -24,7 +24,7 @@ function getLanes() {
   const h = window.innerHeight;
 
   if (window.innerWidth <= 1000) {
-    return [40, 90, 140];
+    return [40, 100, 160];
   } else {
     return [50, 200, 350];
   }
