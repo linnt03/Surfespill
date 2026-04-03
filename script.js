@@ -21,15 +21,16 @@ let spawnRate = 1500;
 let currentLane = 1; // starter i midten
 
 function getLanes() {
+  const h = window.innerHeight;
+
   if (window.innerWidth <= 768) {
-    const h = window.innerHeight;
     return [
-      h * 0.2,
-      h * 0.45,
+      h * 0.3,
+      h * 0.5,
       h * 0.7
     ];
   } else {
-    return [50, 200, 350]; // PC beholder original
+    return [50, 200, 350];
   }
 }
 

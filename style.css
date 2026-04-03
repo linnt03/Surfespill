@@ -5,7 +5,7 @@ body {
 
 #game {
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background: linear-gradient(to top, #0ea5e9, #022c43);
   position: relative;
   overflow: hidden;
@@ -168,8 +168,23 @@ body {
 
 @media (max-width: 1000px) and (orientation: landscape) {
 
+  #game {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+
   #surfer {
     left: 15%;
+  }
+
+  #sky {
+    height: 60%;
+  }
+
+  #wave {
+    background-size: auto 100%;
+    background-position: center bottom;
+    height: 100%;
   }
 
   .obstacle {
