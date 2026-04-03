@@ -23,16 +23,18 @@ let currentLane = 1; // starter i midten
 function getLanes() {
   const h = window.innerHeight;
 
-  if (window.innerWidth <= 768) {
-    return [
-      h * 0.25, // nederst
-      h * 0.45, // midt
-      h * 0.65  // topp
-    ];
+  if (window.innerWidth <= 1000) {
+    return [40, 90, 140];
   } else {
     return [50, 200, 350];
   }
 }
+
+window.addEventListener("resize", () => {
+  lanes = getLanes();
+  updateSurferPosition();
+});
+
 
 let lanes = getLanes();
 

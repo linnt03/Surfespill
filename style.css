@@ -6,7 +6,6 @@ body {
 #game {
   width: 100vw;
   height: 100dvh;
-  background: linear-gradient(to top, #0ea5e9, #022c43);
   position: relative;
   overflow: hidden;
 }
@@ -175,11 +174,10 @@ body {
   #sky {
     height: 10%;
     background-size: cover;
-    background-position: top;
+    background-position: center;
   }
 
   #wave {
-    height: 100%;
     background-size: cover;
     background-position: center bottom;
   }
