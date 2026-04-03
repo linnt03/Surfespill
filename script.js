@@ -25,9 +25,9 @@ function getLanes() {
 
   if (window.innerWidth <= 768) {
     return [
-      h * 0.3,
-      h * 0.5,
-      h * 0.7
+      h * 0.25, // nederst
+      h * 0.45, // midt
+      h * 0.65  // topp
     ];
   } else {
     return [50, 200, 350];
