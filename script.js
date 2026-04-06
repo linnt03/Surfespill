@@ -77,8 +77,13 @@ let waveX = 0;
 const wave = document.getElementById("wave");
 
 function moveWave() {
-  waveX -= speed; // følger game speed
-  wave.style.backgroundPosition = waveX + "px 0px";
+  waveX -= speed;
+
+  if (window.innerWidth <= 1000) {
+    wave.style.backgroundPosition = waveX + "px bottom";
+  } else {
+    wave.style.backgroundPosition = waveX + "px 0px";
+  }
 }
 
 // Skum på bølgen som "glitcher"
