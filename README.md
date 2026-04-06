@@ -1,4 +1,4 @@
-![bilde](Surfespill/assets/posterCastillo.png)
+![bilde](assets/posterCastillo.png)
 
 
 # VIBECODE DAGSPROSJEKT
