@@ -210,4 +210,8 @@ body {
     opacity: 0.1;
   }
 
+  .overlay {
+    transform: none;
+  }
+  
 }
