@@ -212,8 +212,8 @@ body {
 
   .overlay {
     transform: none !important;
-    width: 280px;
-    height: 160px;
+    width: 600px;
+    height: 360px;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
