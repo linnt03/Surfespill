@@ -142,7 +142,7 @@ body {
 
 @media (orientation: portrait) {
   body::before {
-    content: "Rotér mobilen til liggende";
+    content: "Rotér mobilen til liggende for å spille!";
     
     position: fixed;
     top: 0;
@@ -150,8 +150,8 @@ body {
     width: 100%;
     height: 100%;
 
-    background: black;
-    color: red;
+    background: rgb(188, 193, 255);
+    color: rgb(73, 42, 13);
 
     display: flex;
     justify-content: center;
@@ -177,16 +177,26 @@ body {
   }
 
   #wave {
-    height: 60%;
+    height: 75%;
     background-size: auto 100%;
     background-repeat: repeat-x;
     background-position: left bottom;
   }
 
   #tunnel {
-    height: 60%;
+    height: 75%;
+    width: auto;
     background-size: auto 100%;
+    background-repeat: no-repeat;
     background-position: left bottom;
+  }
+
+  #foam {
+    height: 75%;
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    background-position: left bottom;
+    opacity: 0.1;
   }
 
   #surfer {
@@ -206,17 +216,12 @@ body {
     right: 15px;
   }
 
-  #foam {
-    height: 60%;
-  }
-
   .overlay {
     transform: none !important;
-    width: 600px;
-    height: 360px;
+    width: 70vw;
+    height: 70vh;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
   }
-
 }
